@@ -57,15 +57,13 @@ exports.uploadNewDoc = functions.https.onCall(async (data, context) => {
     );
   }
 
-  const text = `Sube un nuevo documento:${data}`;
-
   const msg = {
     to: context.auth.token.email,
     from: "devops@seguridata.com",
     template_id: TEMPLATE_ID,
     dynamic_template_data: {
       subject: context.auth.token.email,
-      text,
+      text: "Sube un nuevo documento",
     },
   };
   await sgMail.send(msg);
